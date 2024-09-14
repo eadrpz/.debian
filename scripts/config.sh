@@ -1,5 +1,6 @@
 #!/bin/bash
 
+if [ -d "$HOME/Documentos/" ]; then
     echo "Spanish Debian Babe..."
 
     cd $HOME/Documentos/.debian/
@@ -14,6 +15,6 @@
     sh $HOME/Documentos/.debian/scripts/resolution $res
 
 else 
-    echo "No english or spanish detected..."
+    echo "No se encontró la carpeta del repositorio en #HOME/Documentos..."
 
 fi
