@@ -162,6 +162,11 @@ window#waybar.hidden {
 	background: #a1b56c;
 }
 
+#workspaces button.persistent {
+	color: #f8f8f8;
+	background: transparent;
+}
+
 #workspaces button.empty {
 	color: #f8f8f8;
 	background: transparent;

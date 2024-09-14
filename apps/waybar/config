@@ -35,7 +35,7 @@
 		"disable-click": false,
 		"current-only": false,
 		"format": "{index}",
-		"persistent-workspaces": {
+		"persistent_workspaces": {
 			"1": [],
 			"2": [],
 	        "3": [],
@@ -101,7 +101,6 @@
 		"format": " {}%"
 	},
 	"keyboard-state": {
-		"interval": 1,
 		"numlock": false,
 		"capslock": true,
 		"format": {
