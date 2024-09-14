@@ -29,6 +29,7 @@ listview {
     lines:							4;
     layout:                         horizontal;
     dynamic:                        true;
+    padding:                        0;
 }
 
 element {

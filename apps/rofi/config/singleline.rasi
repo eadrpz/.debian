@@ -25,6 +25,7 @@ window {
 
 listview {
     lines:                          5;
+    padding:                        0;
 }
 
 element-icon {
