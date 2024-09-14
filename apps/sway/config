@@ -12,7 +12,7 @@
     # Keyboard Layout
     input "type:keyboard" {
         xkb_layout us,latam
-        xkb_options grp:alt_space_toggle
+        xkb_options grp:win_space_toggle
         xkb_numlock enabled
     }
 
@@ -42,7 +42,7 @@
     # client.unfocused #181818f2 #181818f2 #181818f2 #181818f2 #181818f2
 
     # Default
-    client.focused #a1b56c #a1b56c #181818 #a1b56c #a1b56c
+    client.focused #a1b56c #a1b56c #181818 #ab4642 #a1b56c
     # client.focused #181818f2 #181818f2 #f8f8f8f2 #181818f2 #181818f2
     # client.focused_inactive #181818f2 #181818f2 #181818f2 #181818f2 #181818f2
 
@@ -130,8 +130,10 @@
     bindsym $mod+Shift+c exec ~/.config/rofi/bin/delboard
     bindsym $mod+Control+c exec ~/.config/rofi/bin/wipeboard
     bindsym $mod+Escape exec ~/.config/rofi/bin/filesearch
-#   bindsym Alt+Tab exec ~/.config/rofi/bin/multitasking
     bindsym $mod+Control+p exec ~/.config/rofi/bin/powermenu
+
+    # Lockscreen
+    bindsym $mod+Control+l exec swaylock
 
     # Brightness Control
     
@@ -145,8 +147,8 @@
     }
     bindsym $mod+b mode "Brillo"
 
-    bindsym $mod+Alt+equal exec brightnessctl set 5%+
-    bindsym $mod+Alt+minus exec brightnessctl set 5%-
+    bindsym Alt+Shift+equal exec brightnessctl set 5%+
+    bindsym Alt+Shift+minus exec brightnessctl set 5%-
 
     # Gammastep
     bindsym $mod+Control+g exec gammastep -O 4500
@@ -250,8 +252,7 @@
     bindsym $mod+Shift+x focus child
 
     # Switch the current container between different layout styles
-    bindsym $mod+w layout tabbed
-    bindsym $mod+d layout toggle split
+    bindsym $mod+w layout toggle tabbed split
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
@@ -260,7 +261,7 @@
     bindsym $mod+t floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+    bindsym Alt+space focus mode_toggle
 
 ## Scratchpad:
 
@@ -294,9 +295,10 @@
 ## Blueman Manager:
     for_window [app_id="blueman-manager"] floating enable, resize set 400 400
 
-## Thunar:
+## File Manager and File Roller:
     for_window [app_id="nemo"] floating enable, resize set 800 600
     for_window [app_id="Nemo"] floating enable, resize set 800 600
+    for_window [app_id="file-roller"] floating enable
 
 ## Alacritty:
     for_window [app_id="Alacritty"] floating enable, resize set 900 650
