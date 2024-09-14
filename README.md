@@ -1,2 +1,3 @@
 # debian
-Mis ajustes para utilizar con una instalación básica de Debian, apoyándose en Sway, el compositor de Wayland
+- Mis ajustes para utilizar con una instalación básica de Debian, apoyándose en Sway, el compositor de Wayland
+- Estas configs están pensadas para ser usadas en español...
