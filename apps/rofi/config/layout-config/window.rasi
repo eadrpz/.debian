@@ -1,0 +1,16 @@
+@import "../all.rasi"
+@import "../font.rasi"
+@import "../colors.rasi"
+
+window {
+    transparency:                   "false";
+    fullscreen:                     "false";
+    background-color:               @BG;
+    text-color:                     @FG;
+    border:                         5px;
+    border-color:                   @BG;
+    width:                          400px;
+    anchor:                         center;
+    x-offset:                       0;
+    y-offset:                       0;
+}

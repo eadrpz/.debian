@@ -1,0 +1,113 @@
+{
+	"layer": "top",
+	"position": "top",
+	"margin": "0 0 0 0",
+	"modules-left": [ "custom/logo", "custom/finder", "sway/window", "custom/archivo", "custom/ejecutar", "custom/portapapeles" ],
+	"modules-center": ["sway/workspaces"],
+	"modules-right": [ "sway/mode", "sway/language", "tray", "battery", "backlight", "pulseaudio", "clock" ],
+
+	"custom/logo": {
+			"format": "",
+			"on-click": "~/.config/rofi/bin/powermenu"
+	},
+	"custom/finder": {
+			"format": "Finder",
+			"on-click": "~/.config/rofi/bin/launcher"
+	},
+	"custom/archivo": {
+			"format": "Archivo",
+			"on-click": "~/.config/rofi/bin/filesearch"
+	},
+	"custom/ejecutar": {
+			"format": "Ejecutar",
+			"on-click": "~/.config/rofi/bin/runner"
+	},
+	"custom/portapapeles": {
+			"format": "Portapapeles",
+			"on-click": "~/.config/rofi/bin/clipboard"
+	},
+	"sway/window": {
+    		"format": "{app_id}",
+	},
+	"sway/workspaces": {
+		"all-outputs": false,
+		"disable-scroll": true,
+		"disable-click": false,
+		"current-only": false,
+		"format": "{index}",
+		"persistent-workspaces": {
+			"1": [],
+			"2": [],
+	        "3": [],
+			"4": [],
+			"5": [],
+			}
+	},
+	"backlight": {
+	    "device": "intel_backlight",
+	    "format": "{icon}  {percent}%",
+	    "format-icons": ["󰃞", "󰃠"]
+	},
+	"pulseaudio": {
+		"tooltip": false,
+		"scroll-step": 5,
+		"format": "{icon}  {volume}%",
+		"format-muted": "󰖁",
+		"format-icons": {
+			"default": ["󰕿", "󰖀", "󰕾"]
+		}
+	},
+	"temperature": {
+		"format": "{icon} {temperatureC}°C",
+		"format-icons": [""]
+	},
+	"tray": {
+		"icon-size": 16,
+		"spacing": 15
+	},
+	//"network": {
+	//	"tooltip": false,
+	//	"format-wifi": "󰤥  {essid} {ipaddr}",
+	//	"format-ethernet": " {ipaddr}"
+	//},
+	"network": {
+                "on-click": "~/.config/rofi/bin/wifi",
+                "format": "{ifname}",
+                "format-wifi": "󰤥 ",
+                "format-ethernet": " ",
+                "format-disconnected": "", //An empty format will hide the module.
+                "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+                "tooltip-format-wifi": "{essid} - ({ipaddr}) - ({signalStrength}%)",
+                "tooltip-format-ethernet": "{ifname} - {ipaddr}/{cidr}",
+                "tooltip-format-disconnected": "Sin Conexión a Internet",
+                "max-length": 30
+        },
+	"battery": {
+		"interval": 30,
+		"states": {
+			"warning": 15,
+			"critical": 15
+		},
+		"format": "{icon}  {capacity}%",
+		"format-charging": "󱐋  {capacity}%",
+		"format-icons": ["󰂎", "󰁻", "󰁾", "󰂁", "󰁹"],
+	},
+	"cpu": {
+		"tooltip": false,
+		"format": " {}%"
+	},
+	"memory": {
+		"tooltip": false,
+		"format": " {}%"
+	},
+	"sway/language": {
+		"format": "{shortDescription}",
+        },
+	},
+    "clock": {
+        "timezone": "America/Guayaquil",
+        "locale": "es_EC.UTF-8",
+        "format": "{:L%a %d %b.  %H:%M}",
+        "tooltip": true,
+    }
+}

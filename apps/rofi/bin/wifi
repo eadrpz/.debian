@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+
+# Starts a scan of available broadcasting SSIDs
+# nmcli dev wifi rescan
+
+wifi() {
+
+	DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+	CONSTATE=$(nmcli -fields WIFI g | sed -n '1!p')
+
+	if [[ "$CONSTATE" =~ "desactivado" ]]; then
+		TOGGLE="Encender Wi-Fi"
+		CHENTRY=$(echo -e "$TOGGLE" | rofi -dmenu -p "Wi-Fi SSID" -theme $HOME/.config/rofi/config/wifi.rasi)
+		if [ "$CHENTRY" = "Encender Wi-Fi" ]; then
+			nmcli radio wifi on
+			sleep 10 &
+			dunstify -t 10000 -r 2 -u low "El escaneo de Wi-Fi toma tiempo"
+			wifi
+		else
+			exit
+		fi
+
+	elif [[ "$CONSTATE" =~ "activado" ]]; then
+		dunstify -t 10000 -r 2 -u low "El escaneo de Wi-Fi toma tiempo"
+		TOGGLE="Apagar Wi-Fi"
+		FIELDS=SSID
+		POSITION=0
+		YOFF=0
+		XOFF=0
+
+		LIST=$(nmcli --fields "SSID" device wifi list | sed '/^--/d' | sed -n '1!p')
+		# For some reason rofi always approximates character width 2 short... hmmm
+		RWIDTH=$(($(echo "$LIST" | head -n 1 | awk '{print length($0); }')+2))
+		# Dynamically change the height of the rofi menu
+		LINENUM=$(echo "$LIST" | wc -l)
+		# Gives a list of known connections so we can parse it later
+		KNOWNCON=$(nmcli connection show)
+
+		CURRSSID=$(LANGUAGE=C nmcli -t -f active,ssid dev wifi | awk -F: '$1 ~ /^yes/ {print $2}')
+
+		if [[ ! -z $CURRSSID ]]; then
+			HIGHLINE=$(echo  "$(echo "$LIST" | awk -F "[  ]{2,}" '{print $1}' | grep -Fxn -m 1 "$CURRSSID" | awk -F ":" '{print $1}') + 1" | bc )
+		fi
+
+		# HOPEFULLY you won't need this as often as I do
+		# If there are more than 8 SSIDs, the menu will still only have 8 lines
+		if [ "$LINENUM" -gt 8 ] && [[ "$CONSTATE" =~ "activado" ]]; then
+			LINENUM=8
+		elif [[ "$CONSTATE" =~ "desactivado" ]]; then
+			LINENUM=1
+		fi
+
+		CHENTRY=$(echo -e "$TOGGLE\n"Conectar Manualmente"\n$LIST" | uniq -u | rofi -dmenu -p "Wi-Fi SSID" -theme $HOME/.config/rofi/config/wifi.rasi)
+		CHSSID=$(echo "$CHENTRY" | sed  's/\s\{2,\}/\|/g' | awk -F "|" '{print $1}')
+
+		ALREADYCONNECTED="Desconectar\nOlvidar"
+		ACTIVATEDORNOT=$(nmcli -f GENERAL.STATE con show "$CHSSID" | cut -d: -f2 | tr -s ' ')
+
+		if [[ "$ACTIVATEDORNOT" =~ "activada" ]] ; then
+			chosen="$(echo -e "$ALREADYCONNECTED" |  rofi -dmenu -p "Red Wi-Fi conectada actualmente" -theme $HOME/.config/rofi/config/wifi.rasi -selected-row 0)"
+			if [ "$chosen" = "Desconectar" ] ; then
+				nmcli con down "$CHSSID"
+			elif [[ "$chosen" = "Olvidar" ]] ; then
+				nmcli con delete "$CHSSID"
+			else
+				exit
+			fi
+		else
+			if [ "$CHENTRY" = "Conectar Manualmente" ] ; then
+				# Manual entry of the SSID and password (if appplicable)
+				MSSID=$(rofi -dmenu -p "Nombre de la red" -theme $HOME/.config/rofi/config/singleline.rasi -lines 1)
+				# Separating the password from the entered string
+				MPASS=$(rofi -dmenu -p "Contraseña de $MSSID" -theme $HOME/.config/rofi/config/singleline.rasi -lines 1)
+				# If the user entered a manual password, then use the password nmcli command
+				if [ "$MPASS" = "" ]; then
+					nmcli dev wifi con "$MSSID"
+				else
+					nmcli dev wifi con "$MSSID" password "$MPASS"
+				fi
+
+			elif [ "$CHENTRY" = "Apagar Wi-Fi" ]; then
+				nmcli radio wifi off
+
+			else
+				echo $KNOWNCON
+				echo $CHSSID
+				if [[ $(echo "$KNOWNCON" | grep -o "$CHSSID") = "$CHSSID" ]]; then
+					nmcli dev wifi con "$CHSSID"
+				else
+					WIFIPASS=$(rofi -dmenu -p "Contraseña" -theme $HOME/.config/rofi/config/singleline.rasi)
+					if [ "$WIFIPASS" = "" ]; then
+						nmcli dev wifi con "$CHSSID"
+					else
+						nmcli dev wifi con "$CHSSID" password "$WIFIPASS"
+					fi
+				fi
+			fi
+		fi
+	fi
+}
+
+wifi
+
+

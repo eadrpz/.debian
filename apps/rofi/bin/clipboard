@@ -1,0 +1,1 @@
+cliphist list | rofi -dmenu -theme "$HOME/.config/rofi/config/standardtheme.rasi" -i -p "Portapapeles" | cliphist decode | wl-copy

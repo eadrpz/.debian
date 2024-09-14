@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+prompt="Search on the Web"
+
+# Output label string to rofi...
+search="$(dmenu -theme "$HOME/.config/rofi/config/singleline.rasi" -p "$prompt")"
+
+if [[ ! -z "$search" ]]; then
+
+    firefox --search "$search"
+
+fi
+
+exit 0

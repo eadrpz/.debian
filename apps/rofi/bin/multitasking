@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+rofi \
+	-show window \
+	-modi window \
+	-display-window "Multitasking" \
+	-scroll-method 0 \
+	-terminal alacritty \
+	-theme "$HOME"/.config/rofi/config/multitasking.rasi \
+	-no-fixed-num-lines

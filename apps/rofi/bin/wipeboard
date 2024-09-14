@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Ask for confirmation
+yes="Yes"
+no="No"
+yesno="$yes\n$no"
+
+chosen="$(echo -e "$yesno" |  rofi -theme $HOME/.config/rofi/config/wipeboard.rasi -dmenu -p "Clean Clipboard?" -selected-row 0)"
+
+case $chosen in
+	$yes)
+		cliphist wipe
+		;;
+	$no)
+		exit
+		;;
+esac
+		

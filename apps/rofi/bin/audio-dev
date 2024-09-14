@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+    
+    # Show Putput names in Rofi Selector
+    desc=$(pactl list sinks | grep -ie "description:"|cut -d: -f2|sort|dmenu -theme "$HOME/.config/rofi/config/standardtheme.rasi" -i -p "Seleccione la fuente de audio")
+
+    # Choose SINK based on chosen name
+    device=$(pactl list sinks | grep -C1 -F "$desc" | grep Name| cut -d: -f2)
+
+    # Try ti set it as default sink
+if [[ $device != $(pactl list sinks | grep Name| cut -d: -f2) ]]
+then
+    if pactl set-default-sink $device
+    then
+        # if it worked, alert the user
+        dunstify -t 2000 -r 2 -u low "Audio de$desc"
+    else
+        # didn't work, critically alert the user
+        dunstify -t 2000  -u critical "Error al cambiar fuente de audio"
+    fi
+
+else
+    dunstify -t 2000  -u low "Cambio de fuente de audio cancelado"
+fi

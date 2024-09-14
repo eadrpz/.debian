@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+rofi \
+	-show run \
+	-modi run,drun,ssh \
+	-scroll-method 0 \
+	-terminal alacritty \
+	-theme "$HOME"/.config/rofi/config/runner.rasi

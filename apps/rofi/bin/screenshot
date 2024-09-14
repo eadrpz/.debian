@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+rofi_command="rofi -theme $HOME/.config/rofi/config/screenshot.rasi"
+
+time=`date +%Y-%m-%d-%I-%M-%S`
+geometry=`xrandr | head -n1 | cut -d',' -f2 | tr -d '[:blank:],current'`
+dir="$HOME/Pictures/Screenshots"
+file="Screenshot_${time}_${geometry}.png"
+
+# Icons
+icon1="$HOME/.config/dunst/icons/collections.svg"
+icon2="$HOME/.config/dunst/icons/timer.svg"
+
+# Buttons
+layout=`cat $HOME/.config/rofi/config/screenshot.rasi | grep BUTTON | cut -d'=' -f2 | tr -d '[:blank:],*/'`
+if [[ "$layout" == "TRUE" ]]; then
+	screen="󰹑"
+	window=""
+	area="󰩬"
+else
+	screen="Pantalla Completa"
+	window="Ventana"
+	area="Seleccionar Área"
+fi
+
+# take shots
+shotnow () {
+	cd ${dir} && sleep 1  | grim $file
+}
+
+shotwindow () {
+	# cd ${dir} && sleep 1 | grim -g "$(swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focusd).rect | "\(.x),\(.y) \(.width)x\(.height)"')" $file
+	cd ${dir} && sleep 1 | hyprctl -j activewindow | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' | grim -g - $file
+}
+
+shotarea () {
+	cd ${dir} && sleep 1 | grim -g "$(slurp)" $file 
+	# slurp | grim -g - - | wl-copy
+}
+
+if [[ ! -d "$dir" ]]; then
+	mkdir -p "$dir"
+fi
+
+# Variable passed to rofi
+options="$screen\n$window\n$area"
+
+chosen="$(echo -e "$options" |  $rofi_command -p 'Capturar Pantalla' -dmenu -selected-row 0)"
+case $chosen in
+    $screen)
+		sleep 1
+		shotnow
+        ;;
+    $window)
+		sleep 1
+		shotwindow
+        ;;
+	$area)
+		shotarea
+        ;;
+
+    esac
+

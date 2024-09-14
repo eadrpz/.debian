@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+rofi_command="rofi -no-fixed-num-lines -theme $HOME/.config/rofi/config/monitor.rasi"
+
+geometry=`xrandr | head -n1 | cut -d',' -f2 | tr -d '[:blank:],current'`
+
+# Buttons
+layout=`cat $HOME/.config/rofi/config/screenshot.rasi | grep BUTTON | cut -d'=' -f2 | tr -d '[:blank:],*/'`
+if [[ "$layout" == "TRUE" ]]; then
+	pconly="󰍹 "
+	project="󰍺 "
+	dual="󰊲 "
+	monitoronly="󱒃 "
+else
+	pconly="Solo Pantalla del PC"
+	project="Duplicar Pantalla"
+	dual="Extender Pantalla"
+	monitoronly="Solo Segunda Pantalla"
+fi
+
+# change xrandr settings
+principal_screen () {
+	sh $HOME/.config/rofi/bin/layouts/principal_screen.sh	
+}
+
+extend () {
+	sh $HOME/.config/rofi/bin/layouts/extend.sh
+}
+
+second_only () {
+	sh $HOME/.config/rofi/bin/layouts/second_only.sh
+}
+
+duplicate () {
+	sh $HOME/.config/rofi/bin/layouts/duplicate.sh
+}
+
+# Variable passed to rofi
+options="$pconly\n$project\n$dual\n$monitoronly"
+
+chosen="$(echo -e "$options" |  $rofi_command -p 'Proyectar Pantalla' -dmenu -selected-row 0)"
+case $chosen in
+    $pconly)
+		principal_screen
+        ;;
+	$dual)
+		extend
+        ;;
+    $monitoronly)
+		second_only
+		;;
+    $project)
+		duplicate
+        ;;
+esac
+

@@ -1,0 +1,315 @@
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+
+#### SWAY CONFIGS
+
+## Input configuration
+
+    # Keyboard Layout
+    input "type:keyboard" {
+        xkb_layout us,latam
+        xkb_options grp:alt_space_toggle
+        xkb_numlock enabled
+    }
+
+    # Touchpad Settings
+    input "type:touchpad" {
+        tap enabled
+        natural_scroll disabled
+        dwt enabled
+    }
+     mouse_warping container
+
+## Window Borders
+
+    font pango:Product Sans 0
+    default_border pixel 2
+    smart_borders on
+
+    titlebar_border_thickness 1
+    titlebar_padding 5 2 5 2
+    title_align left
+    for_window [title="."] title_format "%title"
+
+## Window Colors
+
+    # Default
+    client.unfocused #383838 #383838 #f8f8f8 #383838 #383838
+    # client.unfocused #181818f2 #181818f2 #181818f2 #181818f2 #181818f2
+
+    # Default
+    client.focused #a1b56c #a1b56c #181818 #a1b56c #a1b56c
+    # client.focused #181818f2 #181818f2 #f8f8f8f2 #181818f2 #181818f2
+    # client.focused_inactive #181818f2 #181818f2 #181818f2 #181818f2 #181818f2
+
+    # Default
+    client.urgent #ab4642 #ab4642 #181818 #ab4642 #ab4642
+
+    client.background #181818
+
+## Variables
+
+    # Logo key. Use Mod1 for Alt.
+    set $mod Mod4
+
+    # Home row direction keys, like vim
+    set $left h
+    set $down j
+    set $up k
+    set $right l
+
+    # Your preferred terminal emulator
+    set $term alacritty
+
+    include /etc/sway/config-vars.d/*
+
+## Output configuration
+
+    # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+    # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+    output * bg $HOME/.wallpaper.jpg fill
+
+    # You can get the names of your outputs by running: swaymsg -t get_outputs
+    # Example configuration:
+    #   output HDMI-A-1 resolution 1920x1080 position 1920,0
+    output * resolution 1920x1080 position 0,0 scale 1.1
+
+## Idle configuration
+
+    # Example configuration:
+    exec swayidle -w \
+             timeout 300 'swaylock -f' \
+             timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+             before-sleep 'swaylock -f'
+    #
+    # This will lock your screen after 300 seconds of inactivity, then turn off
+    # your displays after another 300 seconds, and turn your screens back on when
+    # resumed. It will also lock your screen before your computer goes to sleep.
+
+## Startup apps
+
+    exec_always --no-startup-id blueman-applet
+    exec_always --no-startup-id nm-applet --indicator
+    exec_always dunst
+
+## Polkit and other permissions
+
+    exec xhost + local:
+    exec xhost si:localuser:root
+    exec /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+
+## Clipboard Stuff
+    exec wl-clipboard-history -t
+    exec wl-paste --watch cliphist store
+    exec rm "$HOME/.cache/cliphist/db"
+
+#### KEY BINDINGS
+
+## Basics:
+
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Kill focused window
+    bindsym $mod+q kill
+
+    # Rofi Utilities
+    bindsym $mod+a exec ~/.config/rofi/bin/audio-dev
+    bindsym $mod+r exec ~/.config/rofi/bin/runner
+    bindsym $mod+o exec ~/.config/rofi/bin/launcher
+    bindsym $mod+s exec ~/.config/rofi/bin/screenshot
+    bindsym $mod+p exec ~/.config/rofi/bin/monitor
+    bindsym $mod+k exec ~/.config/rofi/bin/killer
+    bindsym $mod+g exec ~/.config/rofi/bin/websearch
+    bindsym $mod+u exec ~/.config/rofi/bin/usbmount
+    bindsym $mod+c exec ~/.config/rofi/bin/clipboard
+    bindsym $mod+Shift+c exec ~/.config/rofi/bin/delboard
+    bindsym $mod+Control+c exec ~/.config/rofi/bin/wipeboard
+    bindsym $mod+Escape exec ~/.config/rofi/bin/filesearch
+#   bindsym Alt+Tab exec ~/.config/rofi/bin/multitasking
+    bindsym $mod+Control+p exec ~/.config/rofi/bin/powermenu
+
+    # Brightness Control
+    
+    mode "Brillo" {
+        bindsym equal exec brightnessctl set 5%+
+        bindsym minus exec brightnessctl set 5%-
+
+        # Return to default mode
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+    }
+    bindsym $mod+b mode "Brillo"
+
+    bindsym $mod+Alt+equal exec brightnessctl set 5%+
+    bindsym $mod+Alt+minus exec brightnessctl set 5%-
+
+    # Gammastep
+    bindsym $mod+Control+g exec gammastep -O 4500
+    bindsym $mod+Alt+g exec pkill gammastep
+
+    # Volume Control
+    
+    mode "Volumen" {
+        bindsym equal exec amixer set Master 5%+
+        bindsym minus exec amixer set Master 5%-
+        bindsym m exec amixer set Master toggle
+
+        # Return to default mode
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+    }
+    bindsym $mod+v mode "Volumen"
+
+    bindsym Alt+equal exec amixer set Master 5%+
+    bindsym Alt+minus exec amixer set Master 5%-
+    bindsym Alt+m exec amixer set Master toggle
+    # bindsym $mod+Control+equal exec pactl -- set-sink-volume @DEFAULT_SINK@ +5%
+    # bindsym $mod+Control+minus exec pactl -- set-sink-volume @DEFAULT_SINK@ -5%
+    # bindsym $mod+Control+m exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Control+q reload
+
+## Apps
+
+   # File Manager
+   bindsym $mod+e exec nemo
+
+    # Web Browser
+    # bindsym $mod+b exec google-chrome-stable
+
+    # Music
+    bindsym $mod+m exec flatpak run com.github.neithern.g4music
+
+## Focus and move windows
+
+    # Change focus
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+
+## Workspaces:
+
+    # Switch to workspace
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
+
+## Layout stuff:
+
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+Control+h splith
+    bindsym $mod+Control+v splitv
+    bindsym $mod+Control+0 split none
+
+    # Move focus to the parent container
+    bindsym $mod+x focus parent
+    bindsym $mod+Shift+x focus child
+
+    # Switch the current container between different layout styles
+    bindsym $mod+w layout tabbed
+    bindsym $mod+d layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+t floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+## Scratchpad:
+
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+z move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+z scratchpad show
+
+## Resizing containers:
+
+    bindsym $mod+Control+Left resize shrink width 25px
+    bindsym $mod+Control+Down resize grow height 25px
+    bindsym $mod+Control+Up resize shrink height 25px
+    bindsym $mod+Control+Right resize grow width 25px
+
+## Status Bar:
+
+    exec_always --no-startup-id ~/.config/waybar/launch.sh
+
+## Sway
+
+    include /etc/sway/config.d/*
+
+#### WINDOW RULES
+    
+## Blueman Manager:
+    for_window [app_id="blueman-manager"] floating enable, resize set 400 400
+
+## Thunar:
+    for_window [app_id="nemo"] floating enable, resize set 800 600
+    for_window [app_id="Nemo"] floating enable, resize set 800 600
+
+## Alacritty:
+    for_window [app_id="Alacritty"] floating enable, resize set 900 650
+    for_window [app_id="alacritty"] floating enable, set resize set 900 650
+
+## Pavucontrol:
+    for_window [app_id="pavucontrol"] floating enable
+
+## MPV:
+    for_window [app_id="mpv"] floating enable
+
+## SwayIMG:
+    for_window [app_id="swayimg_*"] floating enable, border normal
+
+## G4Music:
+    for_window [app_id="com.github.neithern.g4music"] floating enable

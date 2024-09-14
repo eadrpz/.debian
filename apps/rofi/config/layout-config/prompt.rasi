@@ -1,0 +1,12 @@
+@import "../all.rasi"
+@import "../font.rasi"
+@import "../colors.rasi"
+
+prompt {
+    background-color:               @ON;
+    text-color:                     @NBG;
+    padding:                        10px 20px;
+    font:                           @bold;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+}

@@ -1,0 +1,14 @@
+* {
+    reg:        "Inter Regular  11";
+    bold:       "Inter Bold 11";
+    ita:        "Inter Italic 11";
+    reg-big:    "Inter Regular 12"; 
+    bold-big:   "Inter Bold 12";
+    ita-big:    "Inter Italic 12";
+    reg-sm:     "Inter Regular 8";
+    bold-sm:    "Inter Bold 8";
+    ita-sm:     "Inter Italic 8";
+    reg-icon:   "Inter Regular 18";
+    bold-icon:   "Inter Bold 18";
+    ita-icon:   "Inter Italic 18";
+}

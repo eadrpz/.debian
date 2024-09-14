@@ -1,0 +1,10 @@
+@import "../all.rasi"
+@import "../font.rasi"
+@import "../colors.rasi"
+
+mainbox {
+    background-color:               @BG;
+    children:                       [ inputbar, listview ];
+    padding:                        0px;
+    orientation:                    vertical;
+}
