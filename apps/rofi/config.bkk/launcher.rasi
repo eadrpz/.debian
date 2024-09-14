@@ -1,0 +1,74 @@
+@import "font.rasi"
+@import "colors.rasi"
+@import "layout-config/element.rasi"
+@import "layout-config/entry.rasi"
+@import "layout-config/inputbar.rasi"
+@import "layout-config/listview.rasi"
+@import "layout-config/mainbox.rasi"
+@import "layout-config/prompt.rasi"
+@import "layout-config/textbox-prompt-colon.rasi"
+@import "layout-config/various.rasi"
+@import "layout-config/window.rasi"
+
+configuration {
+    location:                       2;
+    fixed-num-lines:                false;
+}
+
+* {
+    font:                           @reg;
+}
+
+window {
+    width:                          750px;
+}
+
+inputbar {
+    children:                       [textbox-prompt-colon,entry];
+}
+
+textbox-prompt-colon {
+    content:                        "Applications";
+}
+
+listview {
+    lines:			                3;
+    columns:                        4;
+}
+
+element {
+    border-radius:                  10px;
+    text-color:                     @FG;
+    background-color:               transparent;
+    margin:                         5px 10px;
+    padding:                        15px;
+    orientation:                    vertical;
+}
+
+element-icon {
+    background-color: 	            inherit;
+    text-color:       		        inherit;
+    horizontal-align:               0.5;
+    vertical-align:                 0;
+    size:                           64px;
+    border:                         0px;
+}
+
+element-text {
+    background-color: 		        inherit;
+    text-color:       		        inherit;
+    expand:                         true;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    margin:                         5px;
+    font:                           @reg;
+}
+
+element selected {
+    background-color:  @BGA;
+    text-color: @FG;
+}
+
+element-text selected {
+    background-color:               transparent;
+}

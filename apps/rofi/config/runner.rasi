@@ -12,7 +12,6 @@
 @import "layout-config/window.rasi"
 
 configuration {
-    location:                       0;
     fixed-num-lines:                false;
 }
 
@@ -21,7 +20,7 @@ configuration {
 }
 
 window {
-    width:                          500px;
+    width:                          600px;
 }
 
 inputbar {
@@ -33,8 +32,8 @@ textbox-prompt-colon {
 }
 
 listview {
-    columns:                        2;
-    lines:							5;
+    columns:                        3;
+    lines:							7;
 }
 
 element-icon {

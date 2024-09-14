@@ -1,14 +1,13 @@
-@import "../all.rasi"
 @import "../font.rasi"
 @import "../colors.rasi"
 
 listview {
-    border:                         0;
+    border:                         0px 0px 0px;
     background-color:               transparent;
     dynamic:                        true;
     layout:                         vertical;
-    padding:                        0px;
-    margin:                         5px;
+    padding:                        5px 0px;
     horizontal-align:               0.5;
     vertical-align:                 0.5;
+
 }

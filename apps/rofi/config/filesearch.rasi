@@ -12,7 +12,6 @@
 @import "layout-config/window.rasi"
 
 configuration {
-    location:                       0;
     fixed-num-lines:                false;
 }
 

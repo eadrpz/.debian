@@ -5,7 +5,6 @@ configuration {
     drun-display-format:            "{icon} {name}";
     disable-history:                false;
     click-to-exit: 		            true;
-    location:                       0;
     dpi:                            0;
 }
 
@@ -27,33 +26,23 @@ configuration {
 }
 
 window {
-    width:                          257px;
+    width:                          290px;
 }
 
 mainbox {
     children:                       [ prompt, listview ];
-    padding:                        0px;
     orientation:                    horizontal;
-}
-
-textbox-prompt-colon {
-    expand:                         false;
-    content:                        "";
-    background-color:               transparent;
-    text-color:                     @NBG;
-    padding:                        5px 5px;
-}
-
-inputbar {
-    children:                       [textbox-prompt-colon, prompt, textbox-prompt-colon];
-    align-items:                    center;
-    justify-content:                center;
 }
 
 listview {
     columns:                        1;
-    lines:							2;
+    lines:							3;
+    layout:                         horizontal;
     dynamic:                        true;
+}
+
+element {
+    margin:                         0;
 }
 
 element-icon {
@@ -63,4 +52,8 @@ element-icon {
 element-text {
     horizontal-align:               0.5;
     vertical-align:                 0.5;
+}
+
+prompt {
+    margin:                         5px 0 5px 5px;
 }

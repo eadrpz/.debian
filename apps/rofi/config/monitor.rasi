@@ -11,44 +11,28 @@
 @import "layout-config/various.rasi"
 @import "layout-config/window.rasi"
 
-configuration {
-    location:                       0;
-}
-
 * {
     font:                           @reg;
 }
 
 window {
-    width:                          425px;
+    width:                          813px;
 }
 
 mainbox {
     children:                       [ prompt, listview ];
-    padding:                        0px;
     orientation:                    horizontal;
-}
-
-textbox-prompt-colon {
-    expand:                         false;
-    content:                        "";
-    background-color:               transparent;
-    text-color:                     @NBG;
-    padding:                        15px 5px;
-}
-
-inputbar {
-    children:                       [textbox-prompt-colon, prompt, textbox-prompt-colon];
-    vertical-align:                 0.5;
-    background-color:               @BDR;
-    orientation:                    vertical;
 }
 
 listview {
     columns:                        1;
     lines:							4;
-    layout:                         vertical;
+    layout:                         horizontal;
     dynamic:                        true;
+}
+
+element {
+    margin:                         0;
 }
 
 element-icon {
@@ -61,5 +45,5 @@ element-text {
 }
 
 prompt {
-    margin:                         5px;
+    margin:                         5px 0 5px 5px;
 }

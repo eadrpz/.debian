@@ -260,6 +260,31 @@ window#waybar.hidden {
 	font-weight: bold;
 }
 
+#keyboard-state {
+	background: none;
+	font-size: 0;
+	margin: 0;
+	padding: 0;
+}
+
+#keyboard-state label {
+	background: none;
+	font-size: 0;
+	margin: 0;
+	padding: 0;
+}
+
+#keyboard-state label.locked {
+	margin: 5px 11px;
+	padding:  0px 8px;
+	transition: none;
+	color: rgba(24,24,24, 1);
+	background: #a1b56c;
+
+	font-size: 13px;
+	font-weight: bold;
+}
+
 #language {
 	
 	margin: 0px 10px;

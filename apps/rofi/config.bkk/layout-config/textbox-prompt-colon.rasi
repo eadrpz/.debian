@@ -1,12 +1,12 @@
-@import "../all.rasi"
 @import "../font.rasi"
 @import "../colors.rasi"
 
 textbox-prompt-colon {
     expand:                         false;
     content:                        "Texto Personalizable";
-    background-color:               @BGA;
-    text-color:                     @FG;
+    background-color:               @ON;
+    text-color:                     @NBG;
+    border-radius:                  10px;
     padding:                        10px;
     font:                           @bold;
 }

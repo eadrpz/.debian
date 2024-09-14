@@ -1,8 +1,8 @@
-@import "../all.rasi"
 @import "../font.rasi"
 @import "../colors.rasi"
 
 element {
+    border-radius:                  10px;
     text-color:                     @FG;
     background-color:               transparent;
     margin:                         0px 5px;
@@ -29,8 +29,8 @@ element-text {
 }
 
 element selected {
-    background-color:  @ON;
-    text-color: @BG;
+    background-color:  @BGA;
+    text-color: @FG;
 }
 
 element-text selected {

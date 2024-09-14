@@ -5,10 +5,10 @@ configuration {
     drun-display-format:            "{icon} {name}";
     disable-history:                false;
     click-to-exit: 		            true;
+    location:                       2;
     dpi:                            0;
 }
 
-@import "all.rasi"
 @import "font.rasi"
 @import "colors.rasi"
 @import "layout-config/element.rasi"
@@ -26,12 +26,28 @@ configuration {
 }
 
 window {
-    width:                          233px;
+    width:                          234px;
 }
 
 mainbox {
     children:                       [ prompt, listview ];
+    padding:                        0px;
     orientation:                    horizontal;
+}
+
+textbox-prompt-colon {
+    expand:                         false;
+    content:                        "";
+    background-color:               transparent;
+    text-color:                     @NBG;
+    border-radius:                  10px;
+    padding:                        5px 5px;
+}
+
+inputbar {
+    children:                       [textbox-prompt-colon, prompt, textbox-prompt-colon];
+    align-items:                    center;
+    justify-content:                center;
 }
 
 listview {
@@ -39,10 +55,6 @@ listview {
     lines:							3;
     layout:                         horizontal;
     dynamic:                        true;
-}
-
-element {
-    margin:                         0;
 }
 
 element-icon {
@@ -55,5 +67,5 @@ element-text {
 }
 
 prompt {
-    margin:                         5px 0 5px 5px;
+    margin:                         5px;
 }

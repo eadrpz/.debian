@@ -7,7 +7,6 @@ configuration {
     location:                       2;
 }
 
-@import "all.rasi"
 @import "font.rasi"
 @import "colors.rasi"
 @import "layout-config/window.rasi"
@@ -18,12 +17,13 @@ configuration {
 
 
 window {
-    width:                          542px;
+    width:                          461px;
 }
 
 prompt {
     background-color:               @ON;
     text-color:                     @BG;
+    border-radius:                  10px;
     padding:                        5px 15px;
     vertical-align:                 0.5;
     margin:                         0 10px 0 0;
@@ -42,6 +42,7 @@ textbox-prompt-colon {
     vertical-align:                 0.5;
     border:                         0px;
     border-color:                   @BDR;
+    border-radius:                  10px;
 }
 
 inputbar {
@@ -78,6 +79,7 @@ mainbox {
 element {
     text-color:                     @FG;
     orientation:                    horizontal;
+    border-radius:                  10px;
     padding:                        0px 10px;
     background-color:               transparent;
     horizontal-align:               0.5;
@@ -110,6 +112,7 @@ element selected {
     background-color:               @ON;
     text-color:                     @NBG;
     border:                  	    0px 0px 0px 0px;
+    border-radius:                  10px;
     border-color:                   @BDR;
 }
 

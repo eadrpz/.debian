@@ -1,0 +1,10 @@
+@import "../font.rasi"
+@import "../colors.rasi"
+
+inputbar {
+    children:                       [prompt,entry];
+    background-color:               transparent;
+    border-radius:                  10px;
+    margin:                         5px;
+    padding:                        5px;
+}

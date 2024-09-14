@@ -4,7 +4,7 @@
 	"margin": "0 0 0 0",
 	"modules-left": [ "custom/logo", "custom/finder", "sway/window", "custom/archivo", "custom/ejecutar", "custom/portapapeles" ],
 	"modules-center": ["sway/workspaces"],
-	"modules-right": [ "sway/mode", "sway/language", "tray", "battery", "backlight", "pulseaudio", "clock" ],
+	"modules-right": [ "sway/mode", "keyboard-state", "sway/language", "tray", "battery", "backlight", "pulseaudio", "clock" ],
 
 	"custom/logo": {
 			"format": "",
@@ -99,6 +99,19 @@
 	"memory": {
 		"tooltip": false,
 		"format": " {}%"
+	},
+	"keyboard-state": {
+		"interval": 1,
+		"numlock": false,
+		"capslock": true,
+		"format": {
+			"numlock": "{name} Lock",
+			"capslock": "{name} Lock"                                                                                                                                                       
+		},
+		"format-icons": {
+			"locked": " ",
+			"unlocked": " "
+		}
 	},
 	"sway/language": {
 		"format": "{shortDescription}",

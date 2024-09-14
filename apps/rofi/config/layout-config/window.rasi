@@ -5,12 +5,13 @@
 window {
     transparency:                   "false";
     fullscreen:                     "false";
-    background-color:               @BG;
+    background-color:               @BDR;
     text-color:                     @FG;
-    border:                         5px;
-    border-color:                   @BG;
+    border:                         0px;
+    border-color:                   @BDR;
     width:                          400px;
-    anchor:                         center;
+    anchor:                         north;
     x-offset:                       0;
-    y-offset:                       0;
+    y-offset:                       55px;
+    padding:                        5px;
 }

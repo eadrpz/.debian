@@ -1,11 +1,11 @@
-@import "../all.rasi"
 @import "../font.rasi"
 @import "../colors.rasi"
 
 prompt {
-    background-color:               @BGA;
-    text-color:                     @FG;
-    padding:                        0px 10px;
+    background-color:               @ON;
+    text-color:                     @NBG;
+    border-radius:                  10px;
+    padding:                        10px;
     font:                           @bold;
     horizontal-align:               0.5;
     vertical-align:                 0.5;
