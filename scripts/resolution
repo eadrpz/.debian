@@ -1,11 +1,11 @@
 #!/bin/bash
 
 if [ $1 = "1080" ]; then
-    sed -i 's/font-size: 10px/font-size: 13px/g' $HOME/.config/waybar/style.css
-    sed -i 's/min-height: 10px/min-height: 16px/g' $HOME/.config/waybar/style.css
-    sed -i 's/size: 10.0/size: 12.0/g' $HOME/.config/alacritty/alacritty.yml
-    sed -i 's/output * resolution 1366x768 position 0,0 scale 0.9/output * resolution 1920x1080 position 0,0 scale 1/g' $HOME/.config/sway/config
-    sed -i 's/font = Inter 8/font = Inter 10/g' $HOME/.config/dunst/dunstrc
+    # sed -i 's/font-size: 10px/font-size: 13px/g' $HOME/.config/waybar/style.css
+    # sed -i 's/min-height: 10px/min-height: 16px/g' $HOME/.config/waybar/style.css
+    # sed -i 's/size: 10.0/size: 12.0/g' $HOME/.config/alacritty/alacritty.yml
+    sed -i 's/output * resolution 1366x768 position 0,0 scale 0.75/output * resolution 1920x1080 position 0,0 scale 1/g' $HOME/.config/sway/config
+    # sed -i 's/font = Inter 8/font = Inter 10/g' $HOME/.config/dunst/dunstrc
     # sed -i 's/10/13/g' $HOME/.config/rofi/config/font.rasi
     # sed -i 's/12/15/g' $HOME/.config/rofi/config/font.rasi
     # sed -i 's/8/11/g' $HOME/.config/rofi/config/font.rasi
@@ -13,11 +13,11 @@ if [ $1 = "1080" ]; then
     # sed -i 's/export QT_SCREEN_SCALE_FACTORS=1 #768p/export QT_SCREEN_SCALE_FACTORS=1.25 #1080p/g' $HOME/.xprofile
 
 elif [ $1 = "768" ]; then
-    sed -i 's/font-size: 13px/font-size: 10px/g' $HOME/.config/waybar/style.css
-    sed -i 's/min-height: 16px/min-height: 11px/g' $HOME/.config/waybar/style.css
-    sed -i 's/size: 12.0/size: 10.0/g' $HOME/.config/alacritty/alacritty.yml
-    sed -i 's/output * resolution 1920x1080 position 0,0 scale 1/output * resolution 1366x768 position 0,0 scale 0.9/g' $HOME/.config/sway/config
-    sed -i 's/font = Inter 10/font = Inter 8/g' $HOME/.config/dunst/dunstrc
+    # sed -i 's/font-size: 13px/font-size: 10px/g' $HOME/.config/waybar/style.css
+    # sed -i 's/min-height: 16px/min-height: 11px/g' $HOME/.config/waybar/style.css
+    # sed -i 's/size: 12.0/size: 10.0/g' $HOME/.config/alacritty/alacritty.yml
+    sed -i 's/output * resolution 1920x1080 position 0,0 scale 1/output * resolution 1366x768 position 0,0 scale 0.75/g' $HOME/.config/sway/config
+    # sed -i 's/font = Inter 10/font = Inter 8/g' $HOME/.config/dunst/dunstrc
     # sed -i 's/13/10/g' $HOME/.config/rofi/config/font.rasi
     # sed -i 's/15/12/g' $HOME/.config/rofi/config/font.rasi
     # sed -i 's/11/8/g' $HOME/.config/rofi/config/font.rasi
