@@ -131,6 +131,7 @@
     bindsym $mod+Control+c exec ~/.config/rofi/bin/wipeboard
     bindsym $mod+Escape exec ~/.config/rofi/bin/filesearch
     bindsym $mod+Control+p exec ~/.config/rofi/bin/powermenu
+    bindsym XF86PowerOff exec ~/.config/rofi/bin/powermenu
 
     # Lockscreen
     bindsym $mod+Control+l exec swaylock
