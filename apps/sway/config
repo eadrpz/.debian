@@ -311,8 +311,8 @@
 ## MPV:
     for_window [app_id="mpv"] floating enable
 
-## SwayIMG:
-    for_window [app_id="swayimg_*"] floating enable, border normal
+## imv:
+    for_window [app_id="imv"] floating enable, resize set 720 480
 
 ## G4Music:
     for_window [app_id="com.github.neithern.g4music"] floating enable
