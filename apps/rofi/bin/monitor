@@ -1,55 +1,33 @@
-#!/usr/bin/env bash
+#! /bin/bash
+
 rofi_command="rofi -no-fixed-num-lines -theme $HOME/.config/rofi/config/monitor.rasi"
 
-geometry=`xrandr | head -n1 | cut -d',' -f2 | tr -d '[:blank:],current'`
-
-# Buttons
-layout=`cat $HOME/.config/rofi/config/screenshot.rasi | grep BUTTON | cut -d'=' -f2 | tr -d '[:blank:],*/'`
-if [[ "$layout" == "TRUE" ]]; then
-	pconly="󰍹 "
-	project="󰍺 "
-	dual="󰊲 "
-	monitoronly="󱒃 "
-else
-	pconly="Solo Pantalla del PC"
-	project="Duplicar Pantalla"
-	dual="Extender Pantalla"
-	monitoronly="Solo Segunda Pantalla"
-fi
-
-# change xrandr settings
-principal_screen () {
-	sh $HOME/.config/rofi/bin/layouts/principal_screen.sh	
-}
-
-extend () {
-	sh $HOME/.config/rofi/bin/layouts/extend.sh
-}
-
-second_only () {
-	sh $HOME/.config/rofi/bin/layouts/second_only.sh
-}
-
-duplicate () {
-	sh $HOME/.config/rofi/bin/layouts/duplicate.sh
-}
+wdisplays="Simple (wdisplays)"
+swayconfig="Avanzado (Sway Config)"
 
 # Variable passed to rofi
-options="$pconly\n$project\n$dual\n$monitoronly"
+options="$wdisplays\n$swayconfig"
 
 chosen="$(echo -e "$options" |  $rofi_command -p 'Proyectar Pantalla' -dmenu -selected-row 0)"
 case $chosen in
-    $pconly)
-		principal_screen
+    $wdisplays)
+		if wdisplays
+        then
+            dunstify -t 2000 -r 2 -u low "Abriendo wdisplays" 
+        else
+            dunstify -t 2000  -u critical "Error, ¿wdisplays está instalado?"
+        fi
         ;;
-	$dual)
-		extend
-        ;;
-    $monitoronly)
-		second_only
-		;;
-    $project)
-		duplicate
+	$swayconfig)
+		if alacritty -e nvim $HOME/.config/sway/config	
+        then
+            dunstify -t 2000 -r 2 -u low "Abriendo la configuración de Sway en Neovim" 
+        elif alacritty -e nano $HOME/.config/sway/config
+        then
+            dunstify -t 2000 -r 2 -u low "Abriendo la configuración de Sway en Nano" 
+        else
+            dunstify -t 2000 -r 2 -u critical "No se pudo abrir la configuración en Neovim ni en Nano" 
+        fi
         ;;
 esac
 

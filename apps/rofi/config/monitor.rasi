@@ -16,7 +16,7 @@
 }
 
 window {
-    width:                          813px;
+    width:                          529px;
 }
 
 mainbox {
@@ -26,7 +26,7 @@ mainbox {
 
 listview {
     columns:                        1;
-    lines:							4;
+    lines:							2;
     layout:                         horizontal;
     dynamic:                        true;
     padding:                        0;

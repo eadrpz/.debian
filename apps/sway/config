@@ -316,3 +316,6 @@
 
 ## G4Music:
     for_window [app_id="com.github.neithern.g4music"] floating enable
+
+## Wdisplays:
+    for_window [app_id="wdisplays"] floating enable, resize set 1080 700
